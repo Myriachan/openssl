@@ -173,8 +173,7 @@ ossl_md5_blocks_loop:
         add w17, w6, w19              // Add X parameter round 1 D=FF(D, A, B, C, 0x8b44f7af, s=12, M[9])
         and x9, x9, x17               // Continue aux function round 1 F(x,y,z)=(((y^z)&x)^z)
         eor x9, x9, x4                // End aux function round 1 F(x,y,z)=(((y^z)&x)^z)
-        movz x11, #0x5bb1             // Load lower half of constant 0xffff5bb1
-        movk x11, #0xffff, lsl #16    // Load upper half of constant 0xffff5bb1
+        mov w11, #0xffff5bb1          // Load constant 0xffff5bb1 (upper 0xffff allows single instruction)
         add w8, w8, w16               // Add dest value
         add w8, w8, w11               // Add constant 0xffff5bb1
         add w8, w8, w9                // Add aux function result
